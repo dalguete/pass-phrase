@@ -33,9 +33,6 @@ fi
 
 # Function used to deal with the passing passphrase to a key thing
 pass_phrase() {
-  # Agent vars are set in place
-  eval `ssh-agent -s` &> /dev/null
-
   # Get the args passed
   local FILE=$1
   # As passphrase can contain crazy chars, those are escaped just to have a correct
