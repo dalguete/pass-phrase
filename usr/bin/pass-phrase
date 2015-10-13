@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# Utility script used to pass a passphrase to a ssh key. Avoids the step of having
+# the user type it. Useful in automatic processes (like Docker), when no terminal
+# input interaction is possible
+# Author: Daniel Dalgo <dalguete@gmail.com>
+#
+# Recognitions to:
+#
+# Thomas Nyman (http://unix.stackexchange.com/a/90869)
+# user1387661 (http://stackoverflow.com/questions/10538343/redirect-expect-stdin-to-spawn-call)
+# Cupccake (http://stackoverflow.com/a/17848593)
+# Dennis Williamson (http://stackoverflow.com/a/2856010)
+#
+
+set -e
+
+RED='\033[0;31m'
+ORANGE='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Inform about script usage
+if [[ $# != 2 ]]; then
+  echo -e >&2 \
+"${RED}Usage: $0 </path/to/pk_file> <passphrase>${NC}\n" \
+"\n" \
+"${ORANGE}Important${NC}: Verify a ${ORANGE}ssh-agent${NC} is up before running this,\n" \
+"or start one by running:\n" \
+"eval \`ssh-agent -s\`\n"
+
+  exit 1
+fi
+
+# Function used to deal with the passing passphrase to a key thing
+pass_phrase() {
+  # Agent vars are set in place
+  eval `ssh-agent -s` &> /dev/null
+
+  # Get the args passed
+  local FILE=$1
+  # As passphrase can contain crazy chars, those are escaped just to have a correct
+  # string
+  local PWD=$(printf "%q" $2)
+
+  # Deal with the passphrase passing actually.
+  expect -c '
+    spawn -noecho ssh-add '$FILE'
+    expect "Enter passphrase for '$FILE':"
+    send "'$PWD'\n";
+    interact
+  '
+}
+
+# Call the main function
+pass_phrase $@
+
