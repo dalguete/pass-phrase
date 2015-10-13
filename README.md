@@ -5,7 +5,8 @@ user prompt.
 Useful when you have ssh-keys protected with a passphrase and need to set them
 using and automatic process, with no prompt or user interaction.
 
-Appeared as a necessity when dealing with some Docker configurations.
+Appeared as a necessity when dealing with some Docker configurations, that required
+access to key protected sites, but current keys were also passphrase protected.
 
 Ubuntu PPA
 ==========

@@ -1,0 +1,16 @@
+Source: pass-phrase
+Section: utils
+Priority: optional
+Maintainer: Daniel Dalgo <dalguete@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: http://dalguete.com
+Vcs-Browser: https://github.com/dalguete/pass-phrase.git
+
+Package: pass-phrase
+Architecture: any
+Depends: expect, openssh-client
+Suggests: keychain
+Description: Utility script used to pass a passphrase to a ssh key that needs one, but with no user prompt.
+ Useful when you have ssh-keys protected with a passphrase and need to set them
+ using and automatic process, with no prompt or user interaction.

@@ -1,0 +1,5 @@
+pass-phrase (0.1-0ubuntu1) vivid; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Daniel Dalgo <dalguete@gmail.com>  Mon, 12 Oct 2015 19:45:35 -0500
