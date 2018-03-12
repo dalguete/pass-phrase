@@ -22,7 +22,7 @@ NC='\033[0m' # No Color
 # Inform about script usage
 if [[ $# != 2 ]]; then
   echo -e >&2 \
-"${RED}Usage: $0 </path/to/pk_file> <passphrase>${NC}\n" \
+"${RED}Usage: $(basename -- "$0") </path/to/pk_file> <passphrase>${NC}\n" \
 "\n" \
 "${ORANGE}Important${NC}: Verify a ${ORANGE}ssh-agent${NC} is up before running this,\n" \
 "or start one by running:\n" \
